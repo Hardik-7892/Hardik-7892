@@ -21,5 +21,5 @@
 ![](assets/languages.svg)
 
 ---
-![](https://komarev.com/ghpvc/?username=Hardik-7892)
+![](https://komarev.com/ghpvc/?username=Hardik-7892&style=for-the-badge&abbreviated=true)
 
