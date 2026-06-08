@@ -18,7 +18,7 @@
 # 📊 GitHub Stats:
 ![](https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true)<br/>
 ![](https://github-readme-streak-stats-livid-delta.vercel.app/?user=Hardik-7892&theme=default_repocard&hide_border=false)<br/>
-![](https://github-readme-stats.shion.dev/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
+![](https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
 
 ---
 ![](https://komarev.com/ghpvc/?username=Hardik-7892)
