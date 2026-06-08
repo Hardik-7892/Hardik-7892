@@ -1,0 +1,29 @@
+name: Update README Stats
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Update timestamp
+        run: |
+          echo "Last updated: $(date -u)" > update.txt
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add update.txt
+          git commit -m "auto update stats" || exit 0
+          git push
