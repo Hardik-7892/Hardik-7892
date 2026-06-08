@@ -1,0 +1,34 @@
+name: Download Images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Create assets folder
+        run: mkdir -p assets
+
+      - name: Download image 1
+        run: curl -L "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true" -o assets/stats.svg
+
+      - name: Download image 2
+        run: curl -L "https://github-readme-streak-stats-livid-delta.vercel.app/?user=Hardik-7892&theme=default_repocard&hide_border=false" -o assets/image2.jpg
+
+      - name: Download image 3
+        run: curl -L "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&layout=compact" -o assets/image3.jpg
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/
+          git commit -m "Add downloaded images" || echo "No changes to commit"
+          git push
