@@ -22,7 +22,7 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const fs = require('fs');
-
+            console.log("🚀 Script started");
             const query = `
               query($login: String!) {
                 user(login: $login) {
@@ -40,11 +40,17 @@ jobs:
                 }
               }
             `;
-
+            console.log("📡 Running GraphQL...");
             const result = await github.graphql(query, {
               login: context.repo.owner
             });
-
+            console.log("✅ RAW RESULT:");
+            console.log(JSON.stringify(result, null, 2));
+        
+            if (!result || !result.user) {
+              throw new Error("User data is missing from GraphQL response");
+            }
+            
             const u = result.user;
 
             const output = `# 📊 GitHub Text Stats
@@ -62,8 +68,9 @@ jobs:
             
             _Last updated: ${new Date().toUTCString()}_
             `;
-
+            console.log("📝 Writing file...");
             fs.writeFileSync("stats.md", output);
+            console.log("✅ File written");
 
       - name: Commit stats
         run: |
