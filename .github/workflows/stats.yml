@@ -1,29 +1,77 @@
-name: Update README Stats
+name: Generate GitHub Text Stats
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # daily
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Update timestamp
-        run: |
-          echo "Last updated: $(date -u)" > update.txt
+      - name: Generate stats
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const fs = require('fs');
 
-      - name: Commit changes
+            const query = `
+              query($login: String!) {
+                user(login: $login) {
+                  login
+                  name
+                  contributionsCollection {
+                    totalCommitContributions
+                    restrictedContributionsCount
+                    totalPullRequestContributions
+                    totalPullRequestReviewContributions
+                  }
+                  repositoriesContributedTo(includeUserRepositories: true) {
+                    totalCount
+                  }
+                }
+              }
+            `;
+
+            const result = await github.graphql(query, {
+              login: context.repo.owner
+            });
+
+            const u = result.user;
+
+            const output = `# 📊 GitHub Text Stats
+
+            👤 User: ${u.name || u.login}
+            
+            ## Contributions
+            - Commits: ${u.contributionsCollection.totalCommitContributions}
+            - Private contributions: ${u.contributionsCollection.restrictedContributionsCount}
+            - Pull Requests: ${u.contributionsCollection.totalPullRequestContributions}
+            - Reviews: ${u.contributionsCollection.totalPullRequestReviewContributions}
+            
+            ## Repository Activity
+            - Repositories contributed to: ${u.repositoriesContributedTo.totalCount}
+            
+            _Last updated: ${new Date().toUTCString()}_
+            `;
+
+            fs.writeFileSync("stats.md", output);
+
+      - name: Commit stats
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add update.txt
-          git commit -m "auto update stats" || exit 0
+
+          git add stats.md
+          git diff --quiet && exit 0
+          git commit -m "update stats"
+
           git push
