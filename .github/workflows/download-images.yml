@@ -21,6 +21,12 @@ jobs:
       - name: Create assets folder
         run: mkdir -p assets
 
+      - name: Warm up end points
+        run: |
+          curl -fL -o /dev/null "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api?username=Hardik-7892&theme=default_repocard&hide_border=false&count_private=true"
+          curl -fL -o /dev/null "https://github-readme-streak-stats-livid-delta.vercel.app/?user=Hardik-7892&theme=default_repocard&hide_border=false"
+          curl -fL -o /dev/null "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&layout=compact&exclude_repo=github-readme-stats,github-readme-streak-stats"
+        
       - name: Download image 1
         run: curl -L "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api?username=Hardik-7892&theme=default_repocard&hide_border=false&count_private=true" -o assets/stats.svg
 
