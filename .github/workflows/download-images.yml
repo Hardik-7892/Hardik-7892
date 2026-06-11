@@ -11,9 +11,9 @@ permissions:
   contents: write
 
 env:
-  EXCLUDE_REPOS: >
-    github-readme-stats,
-    github-readme-streak-stats,
+  EXCLUDE_REPO_LIST: |
+    github-readme-stats
+    github-readme-streak-stats
     excalidraw
   
 jobs:
@@ -24,6 +24,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Build exclude list
+        run: echo "EXCLUDE_REPOS=$(echo "$EXCLUDE_REPO_LIST" | paste -sd, -)" >> $GITHUB_ENV
+          
       - name: Create assets folder
         run: mkdir -p assets
 
