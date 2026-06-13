@@ -34,7 +34,7 @@ jobs:
         run: |
           curl -fL -o /dev/null "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api?username=Hardik-7892&theme=default_repocard&hide_border=false&count_private=true"
           curl -fL -o /dev/null "https://github-readme-streak-stats-livid-delta.vercel.app/?user=Hardik-7892&theme=default_repocard&hide_border=false"
-          curl -fL -o /dev/null "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&layout=compact&exclude_repo=${EXCLUDE_REPOS// /}"
+          curl -fL -o /dev/null "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&cache_seconds=0&layout=pie&langs_count=8&exclude_repo=${EXCLUDE_REPOS// /}"
         
       - name: Download image 1
         run: curl -L "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api?username=Hardik-7892&theme=default_repocard&hide_border=false&count_private=true" -o assets/stats.svg
@@ -43,7 +43,7 @@ jobs:
         run: curl -L "https://github-readme-streak-stats-livid-delta.vercel.app/?user=Hardik-7892&theme=default_repocard&hide_border=false" -o assets/streak.svg
 
       - name: Download image 3
-        run: curl -L "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&layout=pie&langs_count=10&exclude_repo=${EXCLUDE_REPOS// /}" -o assets/languages.svg
+        run: curl -L "https://github-readme-stats-831179kn8-hardiks-projects-9b7e5c43.vercel.app/api/top-langs/?username=Hardik-7892&theme=default_repocard&hide_border=false&include_all_commits=true&count_private=true&cache_seconds=0&layout=pie&langs_count=8&exclude_repo=${EXCLUDE_REPOS// /}" -o assets/languages.svg
 
       - name: Commit and push changes
         run: |
